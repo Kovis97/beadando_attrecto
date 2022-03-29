@@ -1,6 +1,7 @@
 <?php
 
-use App\Http\Controllers\marcKetto;
+use App\Http\Controllers\CourseController;
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -15,25 +16,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/marcKetto/1', [marcKetto::class, 'index1']);
-Route::get('/marcKetto/2', function () {
-    $technikak = [
-        [
-            'id' => 1,
-            'name' => 'PHP',
-            'description' => 'backend'
-        ],
-        [
-            'id' => 2,
-            'name' => 'Angular',
-            'description' => 'frontend'
-        ],
-        [
-            'id' => 3,
-            'name' => 'React',
-            'description' => 'frontend'
-        ]
-        ];
-        return $technikak;
-});
-Route::get('/marcKetto/3', [marcKetto::class, 'index']);
+Route::get('/courses', [CourseController::class, 'index']);
+Route::get('/courses/{id}', [CourseController::class, 'show']);
+Route::post('/courses', [CourseController::class, 'store']);
+Route::delete("/courses/{course}",[CourseController::class, 'destroy']);
+Route::put('courses/{course}', [CourseController::class, 'update']);
+
+Route::post('users/registration',[UserController::class, 'store']);
+Route::post('auth/login', [UserController::class, 'login']);
